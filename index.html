@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZenChain Faucet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f1117 0%, #11141c 100%);
+      --primary: #00c2ff;
+      --accent: #42f4c5;
+      --text: #e0e0e0;
+      --radius: 12px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      padding: 2rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      animation: slideInDown 1s ease;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #aaa;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      animation: slideInUp 1s ease;
+    }
+
+    input[type="text"] {
+      background: #1a1d24;
+      border: 1px solid #333;
+      padding: 1rem;
+      width: 100%;
+      max-width: 400px;
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 2s ease;
+    }
+
+    .button {
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: pulse 3s infinite;
+    }
+
+    .button:hover {
+      background: var(--accent);
+      transform: scale(1.05);
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 60px;
+      filter: drop-shadow(0 0 10px var(--primary));
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0px rgba(0, 194, 255, 0.4); }
+      50% { box-shadow: 0 0 20px rgba(0, 194, 255, 0.6); }
+    }
+  </style>
+</head>
+<body>
+
+  <img src="zen.png" alt="ZenChain" class="logo" />
+
+  <div class="hero">
+    <h1>ZenChain Faucet</h1>
+    <p>Enter your wallet address to receive testnet ZTC tokens.</p>
+
+    <input type="text" id="wallet" placeholder="Enter your wallet address" />
+
+    <button class="button" onclick="goToClaim()">Claim Tokens</button>
+  </div>
+
+  <script>
+    function isValidAddress(addr) {
+      return /^0x[a-fA-F0-9]{40}$/.test(addr);
+    }
+
+    function goToClaim() {
+      const wallet = document.getElementById('wallet').value.trim();
+      if (!wallet || !isValidAddress(wallet)) return;
+      window.location.href = `/claim/?wallet=${encodeURIComponent(wallet)}`;
+    }
+  </script>
+
+</body>
+</html>
