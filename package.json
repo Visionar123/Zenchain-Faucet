@@ -1,0 +1,8 @@
+{
+  "name": "zenchain-sender",
+  "version": "1.0.0",
+  "description": "Vercel serverless function to send ZTC on ZenChain testnet",
+  "dependencies": {
+    "ethers": "^5.7.2"
+  }
+}
